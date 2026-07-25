@@ -1,13 +1,16 @@
 async function main() {
 
- const Storage = await ethers.getContractFactory("SimpleStorage");
+    const Storage = await ethers.getContractFactory("SimpleStorage");
 
- const storage = await Storage.deploy();
+    const storage = await Storage.deploy();
 
- await storage.waitForDeployment();
+    await storage.waitForDeployment();
 
- console.log(storage.target);
+    console.log("Contract:", storage.target);
 
 }
 
-main();
+main().catch((error)=>{
+    console.error(error);
+    process.exitCode=1;
+});
