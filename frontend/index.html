@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web3</title>
+    <title>Simple Web3 DApp</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Ethers.js -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
 </head>
 <body>
 
-<h1>My First Web3</h1>
+<div class="container">
+    <h1>Simple Storage DApp</h1>
 
-<button id="connectButton">Connect Wallet</button>
+    <button id="connectButton">Connect Wallet</button>
 
-<p id="wallet">Wallet belum terhubung</p>
+    <br><br>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.1/dist/ethers.umd.min.js"></script>
-<script src="../app.js"></script>
+    <input
+        type="number"
+        id="valueInput"
+        placeholder="Enter Value">
+
+    <br><br>
+
+    <button id="setButton">Set Value</button>
+    <button id="getButton">Get Value</button>
+
+    <h2>Stored Value:</h2>
+    <p id="result">0</p>
+</div>
+
+<script src="app.js"></script>
 
 </body>
 </html>
