@@ -1,38 +1,69 @@
-const contractAddress = "PASTE_ALAMAT_KONTRAK_DI_SINI";
+const contractAddress = "YOUR_CONTRACT_ADDRESS";
 
 const abi = [
-  "function setValue(uint256 _value) public",
-  "function getValue() public view returns (uint256)"
+    "function setValue(uint256 _value)",
+    "function getValue() view returns(uint256)"
 ];
 
-async function connect() {
-  if (typeof window.ethereum !== "undefined") {
-    await window.ethereum.request({ method: "eth_requestAccounts" });
+let provider;
+let signer;
+let contract;
 
-    const provider = new ethers.BrowserProvider(window.ethereum);
-    const signer = await provider.getSigner();
+async function connectWallet(){
 
-    const contract = new ethers.Contract(contractAddress, abi, signer);
+    if(typeof window.ethereum === "undefined"){
+        alert("Please install MetaMask");
+        return;
+    }
 
-    return contract;
-  } else {
-    alert("Silakan install MetaMask.");
-  }
+    await window.ethereum.request({
+        method:"eth_requestAccounts"
+    });
+
+    provider = new ethers.BrowserProvider(window.ethereum);
+
+    signer = await provider.getSigner();
+
+    contract = new ethers.Contract(
+        contractAddress,
+        abi,
+        signer
+    );
+
+    alert("Wallet Connected");
 }
 
-async function setValue() {
-  const contract = await connect();
-  const value = document.getElementById("valueInput").value;
+async function setValue(){
 
-  const tx = await contract.setValue(value);
-  await tx.wait();
+    const value = document.getElementById("valueInput").value;
 
-  alert("Nilai berhasil disimpan!");
+    if(value==""){
+        alert("Enter a value");
+        return;
+    }
+
+    const tx = await contract.setValue(value);
+
+    await tx.wait();
+
+    alert("Transaction Success");
 }
 
-async function getValue() {
-  const contract = await connect();
-  const value = await contract.getValue();
+async function getValue(){
 
-  document.getElementById("result").innerText = value;
+    const value = await contract.getValue();
+
+    document.getElementById("result").innerHTML = value;
 }
+
+document
+.getElementById("connectButton")
+.onclick = connectWallet;
+
+document
+.getElementById("setButton")
+.onclick = setValue;
+
+document
+.getElementById("getButton")
+.onclick = getValue;
