@@ -1,10 +1,35 @@
 # My First Web3
 
-Simple Web3 cryptocurrency project.
+Simple Web3 project built with Solidity, Hardhat and ethers.js.
 
 ## Features
 
 - Smart Contract
-- Wallet Connection
+- Connect Wallet
 - Ethereum Compatible
-- JavaScript Frontend
+- Hardhat
+- Deployment Script
+- Unit Test
+
+## Project Structure
+
+contracts/
+scripts/
+test/
+frontend/
+
+## Install
+
+npm install
+
+## Compile
+
+npx hardhat compile
+
+## Test
+
+npx hardhat test
+
+## Deploy
+
+npx hardhat run scripts/deploy.js
